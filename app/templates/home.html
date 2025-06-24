@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Home - LoginOutSystem {% endblock %}
+
+{% block content %}
+<h1>Welcome to the Home Page!</h1>
+{% if current_user.is_authenticated %}
+<p>Hey, {{ current_user.username }}! Your're logged in. Go check your <a href="{{ url_for('app.dashboard') }}">dashboard</a>.</p>
+{% else %}
+<p>Please <a href="{{ url_for('app.login') }}">login</a> or <a href="{{ url_for('app.register') }}">register</a>to get started</p>
+{% endif %}
+{% endblock %}

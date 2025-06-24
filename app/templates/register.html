@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - LoginOutSystem{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: #0f0f0f;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    .form-container {
+        background: linear-gradient(145deg, #1c1c1c, #121212);
+        padding: 30px 30px 25px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px #0ff;
+        width: 350px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        color: #0ff;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #aaa;
+        font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #0ff;
+        background: #000;
+        color: #0ff;
+        border-radius: 5px;
+        outline: none;
+        transition: 0.3s ease;
+        font-size: 1rem;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        box-shadow: 0 0 10px #0ff;
+    }
+
+    .error {
+        color: #ff4444;
+        font-size: 0.8em;
+    }
+
+    .form-submit {
+        width: 100%;
+        padding: 12px;
+        background: #0ff;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
+    .form-submit:hover {
+        background: #00ffff;
+        box-shadow: 0 0 15px #0ff;
+    }
+
+    .login-link {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .login-link a {
+        color: #0ff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="form-container">
+    <h2>Create an Account</h2>
+    <form action="{{ url_for('app.register')}}" method="POST">
+
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.username.label }} <br>
+            {{ form.username(size=32)}} <br>
+            {% for error in form.username.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.password.label }} <br>
+            {{ form.password(size=32)}} <br>
+            {% for error in form.password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.confirm.label }} <br>
+            {{ form.confirm(size=32) }}
+            {% for error in form.confirm.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.submit(class="form-submit") }}
+        </div>
+    </form>
+</div>
+<div class="login-link">
+    <p>Already have an account? <a href="{{ url_for('app.login') }}">Login here</a>.</p>
+</div>
+{% endblock %}
