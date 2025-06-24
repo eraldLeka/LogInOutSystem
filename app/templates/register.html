@@ -8,23 +8,23 @@
         background: #0f0f0f;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #f0f0f0;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
         margin: 0;
-        padding: 0 10px;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
     .form-container {
         background: linear-gradient(145deg, #1c1c1c, #121212);
-        padding: 30px 30px 25px;
+        padding: 20px 25px 25px;
         border-radius: 15px;
         box-shadow: 0 0 15px #0ff;
         width: 350px;
-        max-height: 90vh;
-        overflow-y: auto;
         box-sizing: border-box;
+        margin-top: 30px;
         animation: fadeIn 0.5s ease-in-out;
     }
 
@@ -35,12 +35,11 @@
     }
 
     .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 6px;
     }
 
     label {
         display: block;
-        margin-bottom: 5px;
         color: #aaa;
         font-size: 0.9rem;
     }
@@ -113,17 +112,22 @@
             transform: translateY(0);
         }
     }
+
+    @media (max-width: 400px) {
+        .form-container {
+            width: 100%;
+        }
+    }
 </style>
 
 <div class="form-container">
     <h2>Create an Account</h2>
-    <form action="{{ url_for('app.register')}}" method="POST">
-
+    <form action="{{ url_for('app.register') }}" method="POST">
         {{ form.hidden_tag() }}
 
         <div class="form-group">
             {{ form.username.label }} <br>
-            {{ form.username(size=32)}} <br>
+            {{ form.username(size=32) }} <br>
             {% for error in form.username.errors %}
                 <span class="error">{{ error }}</span>
             {% endfor %}
@@ -131,7 +135,7 @@
 
         <div class="form-group">
             {{ form.password.label }} <br>
-            {{ form.password(size=32)}} <br>
+            {{ form.password(size=32) }} <br>
             {% for error in form.password.errors %}
                 <span class="error">{{ error }}</span>
             {% endfor %}
@@ -139,7 +143,7 @@
 
         <div class="form-group">
             {{ form.confirm.label }} <br>
-            {{ form.confirm(size=32) }}
+            {{ form.confirm(size=32) }} <br>
             {% for error in form.confirm.errors %}
                 <span class="error">{{ error }}</span>
             {% endfor %}
@@ -150,6 +154,7 @@
         </div>
     </form>
 </div>
+
 <div class="login-link">
     <p>Already have an account? <a href="{{ url_for('app.login') }}">Login here</a>.</p>
 </div>
